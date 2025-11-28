@@ -5,6 +5,19 @@ import { ApolloProviderWrapper } from "@/lib/apollo";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import "./globals.css";
 
+/**
+ * Global Providers Setup:
+ * 
+ * - ApolloProviderWrapper: Provides Apollo Client context for GraphQL queries/mutations
+ *   All client components can use useQuery, useMutation, etc.
+ * 
+ * - Zustand Store: No provider needed - the store is available globally via useAppStore hook
+ *   Import and use: import { useAppStore } from '@/store'
+ * 
+ * Provider order: ErrorBoundary > ApolloProvider > children
+ * This ensures error handling wraps all providers and Apollo is available to all children.
+ */
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
