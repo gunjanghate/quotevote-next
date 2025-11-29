@@ -35,6 +35,7 @@
       "@/components/ui/*": ["./src/components/ui/*"],
       "@/components/ErrorBoundary": ["./src/components/ErrorBoundary"],
       "@/components/LoadingSpinner": ["./src/components/LoadingSpinner"],
+      "@/components/Avatar": ["./src/components/Avatar"],
       "@/components/*": ["./src/app/components/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/store/*": ["./src/store/*"],
