@@ -10,7 +10,6 @@
 
 import { renderHook, act } from '@testing-library/react'
 import { usePagination } from '@/hooks/usePagination'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 
 // Mock Next.js navigation hooks
 const mockPush = jest.fn()

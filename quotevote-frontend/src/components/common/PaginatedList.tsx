@@ -44,8 +44,9 @@ export function PaginatedList<T = unknown>({
   // Styling
   className,
   contentClassName,
-  paginationClassName,
-  
+  // paginationClassName is reserved for future use
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  paginationClassName: _paginationClassName,
   // Other props
   children,
   ...otherProps

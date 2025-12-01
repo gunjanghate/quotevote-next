@@ -705,8 +705,8 @@ describe('AlertList Component', () => {
       const { rerender } = render(<AlertList alerts={[]} loading />)
 
       // Should show skeletons
-      let container = document.body
-      let skeletons = container.querySelectorAll('[class*="animate-pulse"]')
+      const container = document.body
+      const skeletons = container.querySelectorAll('[class*="animate-pulse"]')
       expect(skeletons.length).toBe(3)
 
       // Switch to empty state

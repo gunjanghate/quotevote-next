@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
 export interface UsePaginationOptions {
@@ -211,20 +211,30 @@ export function usePaginationWithFilters<T extends unknown[]>(
   dependencies: T = [] as unknown as T
 ): UsePaginationReturn {
   const pagination = usePagination(paginationOptions);
-  const [previousDependencies, setPreviousDependencies] = useState<T>(dependencies);
+  const previousDependenciesRef = useRef<T>(dependencies);
+  const isInitialMountRef = useRef(true);
 
   // Reset to first page when dependencies (filters) change
   useEffect(() => {
-    // Only reset if dependencies actually changed (not on initial mount)
+    // Skip on initial mount
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false;
+      previousDependenciesRef.current = dependencies;
+      return;
+    }
+
+    // Only reset if dependencies actually changed
     const dependenciesChanged = dependencies.some(
-      (dep, index) => dep !== previousDependencies[index]
+      (dep, index) => dep !== previousDependenciesRef.current[index]
     );
     
     if (dependenciesChanged && paginationOptions.resetOnFilterChange !== false) {
       pagination.resetToFirstPage();
     }
     
-    setPreviousDependencies(dependencies);
+    // Update ref (not state) to track previous dependencies
+    previousDependenciesRef.current = dependencies;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 
   return pagination;

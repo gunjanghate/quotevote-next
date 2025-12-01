@@ -13,11 +13,9 @@ import { useSEOHead } from '@/hooks/useSEOHead'
 
 describe('useSEOHead Hook', () => {
   let originalTitle: string
-  let headElement: HTMLHeadElement
 
   beforeEach(() => {
     originalTitle = document.title
-    headElement = document.head
     // Clear existing meta and link tags
     document.head.innerHTML = ''
     document.title = ''
