@@ -434,9 +434,8 @@ export interface SignOutButtonProps extends React.ComponentProps<'button'> {
   className?: string;
 }
 
-export interface GetAccessButtonProps {
-  // No props - this is a self-contained button
-}
+// GetAccessButton component has no props
+export type GetAccessButtonProps = Record<string, never>;
 
 export interface SettingsSaveButtonProps extends React.ComponentProps<'button'> {
   /**
@@ -476,7 +475,85 @@ export interface SettingsIconButtonProps {
   fontSize?: string;
 }
 
-export interface SelectPlansButtonProps extends React.ComponentProps<'button'> {
-  // Extends button props
+export type SelectPlansButtonProps = React.ComponentProps<'button'>;
+
+// Password Reset Component Types
+export interface ForgotPasswordFormProps {
+  /**
+   * Callback function when form is submitted
+   */
+  onSubmit: (values: { email: string }) => void | Promise<void>;
+  /**
+   * Whether the form is in a loading state
+   */
+  loading: boolean;
+  /**
+   * Error message to display
+   */
+  error?: string | null;
+}
+
+export interface ForgotPasswordProps {
+  /**
+   * Callback function when form is submitted
+   */
+  onSubmit: (values: { email: string }) => void | Promise<void>;
+  /**
+   * Whether the form is in a loading state
+   * @default false
+   */
+  loading?: boolean;
+  /**
+   * Error message to display
+   */
+  error?: string | null;
+}
+
+// EmailSent component has no props
+export type EmailSentProps = Record<string, never>;
+
+export interface PasswordResetFormProps {
+  /**
+   * Callback function when form is submitted
+   */
+  onSubmit: (values: { password: string; confirmPassword: string }) => void | Promise<void>;
+  /**
+   * Whether the form is in a loading state
+   */
+  loading: boolean;
+  /**
+   * Error message to display
+   */
+  error?: string | null;
+}
+
+export interface PasswordResetProps {
+  /**
+   * Callback function when form is submitted
+   */
+  onSubmit: (values: { password: string; confirmPassword: string }) => void | Promise<void>;
+  /**
+   * Whether the form is in a loading state
+   * @default false
+   */
+  loading?: boolean;
+  /**
+   * Error message to display
+   */
+  error?: string | null;
+  /**
+   * Whether the password has been successfully updated
+   * @default false
+   */
+  passwordUpdated?: boolean;
+  /**
+   * Whether the reset token is valid
+   */
+  isValidToken?: boolean;
+  /**
+   * Whether token verification is in progress
+   * @default false
+   */
+  loadingData?: boolean;
 }
 
