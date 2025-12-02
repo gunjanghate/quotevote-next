@@ -8,7 +8,7 @@
  */
 
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 
@@ -27,6 +27,7 @@ export function LoginForm({ onSubmit, loading, loginError }: LoginFormProps) {
         formState: { errors },
         setError,
         watch,
+        control,
     } = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -94,11 +95,18 @@ export function LoginForm({ onSubmit, loading, loginError }: LoginFormProps) {
 
             {/* Terms of Service Checkbox */}
             <div className="flex items-start space-x-2">
-                <Checkbox
-                    id="tos"
-                    {...register('tos')}
-                    disabled={loading}
-                    aria-invalid={!!errors.tos}
+                <Controller
+                    name="tos"
+                    control={control}
+                    render={({ field }) => (
+                        <Checkbox
+                            id="tos"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            disabled={loading}
+                            aria-invalid={!!errors.tos}
+                        />
+                    )}
                 />
                 <div className="grid gap-1.5 leading-none">
                     <Label
@@ -123,11 +131,18 @@ export function LoginForm({ onSubmit, loading, loginError }: LoginFormProps) {
 
             {/* Code of Conduct Checkbox */}
             <div className="flex items-start space-x-2">
-                <Checkbox
-                    id="coc"
-                    {...register('coc')}
-                    disabled={loading}
-                    aria-invalid={!!errors.coc}
+                <Controller
+                    name="coc"
+                    control={control}
+                    render={({ field }) => (
+                        <Checkbox
+                            id="coc"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            disabled={loading}
+                            aria-invalid={!!errors.coc}
+                        />
+                    )}
                 />
                 <div className="grid gap-1.5 leading-none">
                     <Label
