@@ -11,7 +11,14 @@ import { useState } from 'react';
 import { Login } from '@/components/Login';
 import { loginUser } from '@/lib/auth';
 import { useAppStore } from '@/store/useAppStore';
-import type { LoginFormData } from '@/lib/validation/loginSchema';
+import type { LoginFormData } from '@/types/login';
+
+interface User {
+    id?: string;
+    username?: string;
+    email?: string;
+    [key: string]: unknown;
+}
 
 export default function LoginTestPage() {
     const [loading, setLoading] = useState(false);
@@ -21,8 +28,6 @@ export default function LoginTestPage() {
     const handleSubmit = async (values: LoginFormData) => {
         const { username, password } = values;
 
-        console.log('Login form submitted:', { username, password });
-
         setLoading(true);
         setLoginError(null);
 
@@ -30,16 +35,13 @@ export default function LoginTestPage() {
             const response = await loginUser(username, password);
 
             if (response.success) {
-                console.log('Login successful:', response.data);
-                setUserData((response.data?.user || {}) as Record<string, unknown>);
+                setUserData((response.data?.user || {}) as User);
                 // In a real app, you would redirect here
                 // router.push('/dashboard');
             } else {
-                console.error('Login failed:', response.error);
                 setLoginError(response.error || 'Login failed');
             }
         } catch (error) {
-            console.error('Login error:', error);
             setLoginError(
                 error instanceof Error ? error.message : 'An unexpected error occurred'
             );

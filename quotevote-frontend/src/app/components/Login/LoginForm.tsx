@@ -14,11 +14,11 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/app/components/ui/label';
-import { Checkbox } from '@/app/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 
-import { loginSchema, type LoginFormData } from '@/lib/validation/loginSchema';
-import type { LoginFormProps } from '@/types/login';
+import { loginSchema } from '@/lib/validation/loginSchema';
+import type { LoginFormProps, LoginFormData } from '@/types/login';
 
 export function LoginForm({ onSubmit, loading, loginError }: LoginFormProps) {
     const {

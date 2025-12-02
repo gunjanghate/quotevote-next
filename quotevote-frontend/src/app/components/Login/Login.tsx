@@ -5,21 +5,54 @@
  * 
  * Main login page component that wraps the LoginForm.
  * Migrated from Material UI to shadcn/ui with Tailwind CSS.
+ * Features geographic location backgrounds to inspire global unity.
  */
 
+import { useEffect, useState } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { Card } from '@/components/ui/card';
 import { LoginForm } from './LoginForm';
 import type { LoginProps } from '@/types/login';
 import Link from 'next/link';
 
+// Geographic location background images to inspire global unity
+const backgroundImages = [
+    'viviana-rishe-UC8fvOyG5pU-unsplash.jpg',
+    'steph-smith-3jYcQf9oiJ8-unsplash.jpg',
+    'sergio-rodriguez-rrlEOXRmMAA-unsplash.jpg',
+    'sergio-otoya-gCNh426vB30-unsplash.jpg',
+    'rondell-chaz-mabunga-EHLKkMDxe3M-unsplash.jpg',
+    'rommel-paras-wrHnE3kMplg-unsplash.jpg',
+    'peter-thomas-efLcMHXtrg0-unsplash.jpg',
+    'julia-caesar-jeXkw2HR1SU-unsplash.jpg',
+    'ehmir-bautista-JjDqyWuWZyU-unsplash.jpg',
+    'adam-navarro-qXcl3z7_AOc-unsplash.jpg',
+    'actionvance-guy5aS3GvgA-unsplash.jpg',
+];
+
 export function Login({ onSubmit = () => { }, loading = false }: LoginProps) {
     const loginError = useAppStore((state) => state.user.loginError);
+    const [selectedBackground, setSelectedBackground] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Select a random background image on first load
+        if (!selectedBackground) {
+            const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+            setSelectedBackground(backgroundImages[randomIndex]);
+        }
+    }, [selectedBackground]);
+
+    const backgroundStyle = selectedBackground
+        ? { backgroundImage: `url('/assets/bg/${selectedBackground}')` }
+        : { backgroundImage: `url('/assets/Mountain.png')` };
 
     return (
-        <div className="min-h-screen flex items-start justify-center bg-muted/30 pt-8 px-4">
+        <div
+            className="min-h-screen flex items-start justify-center pt-8 px-4 bg-cover bg-center bg-no-repeat"
+            style={backgroundStyle}
+        >
             <div className="w-full max-w-md mx-auto">
-                <Card className="p-8 shadow-lg">
+                <Card className="p-8 shadow-lg backdrop-blur-sm bg-background/95">
                     <div className="space-y-6">
                         {/* Header */}
                         <div className="text-center">
