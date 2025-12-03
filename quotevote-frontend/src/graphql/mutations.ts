@@ -102,3 +102,25 @@ export const UPDATE_TYPING = gql`
     }
   }
 `
+
+/**
+ * Send password reset email mutation
+ */
+export const SEND_PASSWORD_RESET_EMAIL = gql`
+  mutation SendPasswordResetEmail($email: String!) {
+    sendPasswordResetEmail(email: $email)
+  }
+`
+
+/**
+ * Update user password mutation
+ */
+export const UPDATE_USER_PASSWORD = gql`
+  mutation UpdateUserPassword(
+    $username: String!
+    $password: String!
+    $token: String!
+  ) {
+    updateUserPassword(username: $username, password: $password, token: $token)
+  }
+`

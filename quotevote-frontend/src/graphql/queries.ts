@@ -52,3 +52,12 @@ export const GET_ROSTER = gql`
     }
   }
 `
+
+/**
+ * Verify password reset token query
+ */
+export const VERIFY_PASSWORD_RESET_TOKEN = gql`
+  query VerifyUserPasswordResetToken($token: String!) {
+    verifyUserPasswordResetToken(token: $token)
+  }
+`
