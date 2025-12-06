@@ -1,4 +1,4 @@
-import { renderHook, act, waitFor } from '@testing-library/react'
+import { renderHook, waitFor } from '@testing-library/react'
 import { useResponsive } from '@/hooks/useResponsive'
 
 // Mock window.matchMedia
@@ -41,16 +41,20 @@ describe('useResponsive', () => {
 
     it('should return sm breakpoint for width >= 640px and < 768px', () => {
         // Only sm query matches
-        window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-            matches: query === '(min-width: 640px)' && query !== '(min-width: 768px)',
-            media: query,
-            onchange: null,
-            addListener: jest.fn(),
-            removeListener: jest.fn(),
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
-            dispatchEvent: jest.fn(),
-        }))
+        window.matchMedia = jest.fn().mockImplementation((query: string) => {
+            const isSm = query === '(min-width: 640px)'
+            const isNotMd = query !== '(min-width: 768px)'
+            return {
+                matches: isSm && isNotMd,
+                media: query,
+                onchange: null,
+                addListener: jest.fn(),
+                removeListener: jest.fn(),
+                addEventListener: jest.fn(),
+                removeEventListener: jest.fn(),
+                dispatchEvent: jest.fn(),
+            }
+        })
         const { result } = renderHook(() => useResponsive())
 
         waitFor(() => {
@@ -60,16 +64,20 @@ describe('useResponsive', () => {
 
     it('should return md breakpoint for width >= 768px and < 1024px', () => {
         // md query matches
-        window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-            matches: query === '(min-width: 768px)' && query !== '(min-width: 1024px)',
-            media: query,
-            onchange: null,
-            addListener: jest.fn(),
-            removeListener: jest.fn(),
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
-            dispatchEvent: jest.fn(),
-        }))
+        window.matchMedia = jest.fn().mockImplementation((query: string) => {
+            const isMd = query === '(min-width: 768px)'
+            const isNotLg = query !== '(min-width: 1024px)'
+            return {
+                matches: isMd && isNotLg,
+                media: query,
+                onchange: null,
+                addListener: jest.fn(),
+                removeListener: jest.fn(),
+                addEventListener: jest.fn(),
+                removeEventListener: jest.fn(),
+                dispatchEvent: jest.fn(),
+            }
+        })
         const { result } = renderHook(() => useResponsive())
 
         waitFor(() => {
@@ -79,16 +87,20 @@ describe('useResponsive', () => {
 
     it('should return lg breakpoint for width >= 1024px and < 1280px', () => {
         // lg query matches
-        window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-            matches: query === '(min-width: 1024px)' && query !== '(min-width: 1280px)',
-            media: query,
-            onchange: null,
-            addListener: jest.fn(),
-            removeListener: jest.fn(),
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
-            dispatchEvent: jest.fn(),
-        }))
+        window.matchMedia = jest.fn().mockImplementation((query: string) => {
+            const isLg = query === '(min-width: 1024px)'
+            const isNotXl = query !== '(min-width: 1280px)'
+            return {
+                matches: isLg && isNotXl,
+                media: query,
+                onchange: null,
+                addListener: jest.fn(),
+                removeListener: jest.fn(),
+                addEventListener: jest.fn(),
+                removeEventListener: jest.fn(),
+                dispatchEvent: jest.fn(),
+            }
+        })
         const { result } = renderHook(() => useResponsive())
 
         waitFor(() => {
@@ -168,48 +180,60 @@ describe('useResponsive', () => {
 
     it('should detect exact breakpoint boundaries', async () => {
         // Test sm boundary - only sm query matches
-        window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-            matches: query === '(min-width: 640px)' && query !== '(min-width: 768px)',
-            media: query,
-            onchange: null,
-            addListener: jest.fn(),
-            removeListener: jest.fn(),
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
-            dispatchEvent: jest.fn(),
-        }))
+        window.matchMedia = jest.fn().mockImplementation((query: string) => {
+            const isSm = query === '(min-width: 640px)'
+            const isNotMd = query !== '(min-width: 768px)'
+            return {
+                matches: isSm && isNotMd,
+                media: query,
+                onchange: null,
+                addListener: jest.fn(),
+                removeListener: jest.fn(),
+                addEventListener: jest.fn(),
+                removeEventListener: jest.fn(),
+                dispatchEvent: jest.fn(),
+            }
+        })
         const { result: result1 } = renderHook(() => useResponsive())
         await waitFor(() => {
             expect(result1.current.breakpoint).toBe('sm')
         })
 
         // Test md boundary
-        window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-            matches: query === '(min-width: 768px)' && query !== '(min-width: 1024px)',
-            media: query,
-            onchange: null,
-            addListener: jest.fn(),
-            removeListener: jest.fn(),
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
-            dispatchEvent: jest.fn(),
-        }))
+        window.matchMedia = jest.fn().mockImplementation((query: string) => {
+            const isMd = query === '(min-width: 768px)'
+            const isNotLg = query !== '(min-width: 1024px)'
+            return {
+                matches: isMd && isNotLg,
+                media: query,
+                onchange: null,
+                addListener: jest.fn(),
+                removeListener: jest.fn(),
+                addEventListener: jest.fn(),
+                removeEventListener: jest.fn(),
+                dispatchEvent: jest.fn(),
+            }
+        })
         const { result: result2 } = renderHook(() => useResponsive())
         await waitFor(() => {
             expect(result2.current.breakpoint).toBe('md')
         })
 
         // Test lg boundary
-        window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-            matches: query === '(min-width: 1024px)' && query !== '(min-width: 1280px)',
-            media: query,
-            onchange: null,
-            addListener: jest.fn(),
-            removeListener: jest.fn(),
-            addEventListener: jest.fn(),
-            removeEventListener: jest.fn(),
-            dispatchEvent: jest.fn(),
-        }))
+        window.matchMedia = jest.fn().mockImplementation((query: string) => {
+            const isLg = query === '(min-width: 1024px)'
+            const isNotXl = query !== '(min-width: 1280px)'
+            return {
+                matches: isLg && isNotXl,
+                media: query,
+                onchange: null,
+                addListener: jest.fn(),
+                removeListener: jest.fn(),
+                addEventListener: jest.fn(),
+                removeEventListener: jest.fn(),
+                dispatchEvent: jest.fn(),
+            }
+        })
         const { result: result3 } = renderHook(() => useResponsive())
         await waitFor(() => {
             expect(result3.current.breakpoint).toBe('lg')
