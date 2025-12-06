@@ -47,8 +47,8 @@ quotevote-next/
 
 ## 🎨 Design Resources
 
-- **[UI Design Inspiration (Figma)](https://www.figma.com/design/b4zMmypvTj7R9HgcWUwGHM/Quote.Vote-User-Interface-Design)** - Design inspiration and UI patterns
-- **[UI Design Specifications (Zeplin)](https://zpl.io/VDlzXPg)** - Detailed design specifications and measurements
+- **[UI Design Inspiration (Figma)](https://www.figma.com/design/b4zMmypvTj7R9HgcWUwGHM/Quote.Vote-User-Interface-Design)**
+- **[UI Design Specifications (Zeplin)](https://zpl.io/VDlzXPg)**
 
 ## 📋 Prerequisites
 

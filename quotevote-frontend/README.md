@@ -16,6 +16,11 @@ A modern, type-safe frontend application built with Next.js 16, React 19, and Ty
 - **Form Handling**: [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
 - **Package Manager**: [pnpm](https://pnpm.io/)
 
+## 🎨 Design Resources
+
+- **[Quote.Vote UI Design (Figma)](https://www.figma.com/design/b4zMmypvTj7R9HgcWUwGHM/Quote.Vote-User-Interface-Design)**
+- **[UI Design Specifications (Zeplin)](https://zpl.io/VDlzXPg)**
+
 ## 📋 Prerequisites
 
 - **Node.js**: 20.x or higher
@@ -185,8 +190,8 @@ pnpm format:check
 
 The UI design is a work in progress and serves as a source of inspiration for the implementation:
 
-- **[Quote.Vote UI Design (Figma)](https://www.figma.com/design/b4zMmypvTj7R9HgcWUwGHM/Quote.Vote-User-Interface-Design)** - Design inspiration and UI patterns (work in progress)
-- **[UI Design Specifications (Zeplin)](https://zpl.io/VDlzXPg)** - Detailed design specifications and measurements
+- **[Quote.Vote UI Design (Figma)](https://www.figma.com/design/b4zMmypvTj7R9HgcWUwGHM/Quote.Vote-User-Interface-Design)**
+- **[UI Design Specifications (Zeplin)](https://zpl.io/VDlzXPg)**
 
 **Note**: The Figma design is not fully completed. Use it as a reference and inspiration for:
 - Color schemes and theming direction
